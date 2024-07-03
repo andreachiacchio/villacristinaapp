@@ -65,7 +65,7 @@ const CheckinEngine = ({ apartmentTitle, apartmentName }) => {
 
   return (
     <div id="wrapper">
-        <Menu />
+        
       <div id="bg"></div>
       <div id="overlay"></div>
 
