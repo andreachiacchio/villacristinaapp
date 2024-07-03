@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import "./static/css/main.css";
+import "./static/css/noscript.css";
+
 
 const CheckinEngine = ({ apartmentTitle, apartmentName }) => {
   const currentDate = new Date();
@@ -10,7 +13,6 @@ const CheckinEngine = ({ apartmentTitle, apartmentName }) => {
   const [month, setMonth] = useState(currentMonth);
 
   useEffect(() => {
-    
     window.onload = () => document.body.classList.remove("is-preload");
     window.ontouchmove = () => false;
     window.onorientationchange = () => (document.body.scrollTop = 0);
