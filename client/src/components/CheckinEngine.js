@@ -63,6 +63,11 @@ const CheckinEngine = ({ apartmentTitle, apartmentName }) => {
     
   };
 
+  const handleChange = (setter) => (e) => {
+    setter(e.target.value);
+    setRedirectUrl(""); // Reset the redirect URL on change
+  };
+
   return (
     <div id="wrapper">
         
@@ -86,7 +91,7 @@ const CheckinEngine = ({ apartmentTitle, apartmentName }) => {
                     name="day"
                     id="day"
                     value={day}
-                    onChange={(e) => setDay(e.target.value)}
+                    onChange={handleChange(setDay)}
                     defaultvalue={day}
                   >
                     <option value="01">1</option>
