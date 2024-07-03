@@ -134,7 +134,7 @@ const CheckinEngine = ({ apartmentTitle, apartmentName }) => {
                     name="month"
                     id="month"
                     value={month}
-                    onChange={(e) => setMonth(e.target.value)}
+                    onChange={handleChange(setMonth)}
                     defaultvalue={month}
                   >
                     <option value="01">January</option>
