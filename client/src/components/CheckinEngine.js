@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import "./static/css/main.css";
-import "./static/css/noscript.css";
-import Menu from './Menu';
 
 const CheckinEngine = ({ apartmentTitle, apartmentName }) => {
   const currentDate = new Date();
@@ -13,6 +10,7 @@ const CheckinEngine = ({ apartmentTitle, apartmentName }) => {
   const [month, setMonth] = useState(currentMonth);
 
   useEffect(() => {
+    
     window.onload = () => document.body.classList.remove("is-preload");
     window.ontouchmove = () => false;
     window.onorientationchange = () => (document.body.scrollTop = 0);
@@ -63,6 +61,12 @@ const CheckinEngine = ({ apartmentTitle, apartmentName }) => {
     
   };
 
+  const handleChange = (setter) => (e) => {
+    setter(e.target.value);
+    setRedirectUrl(""); // Reset the redirect URL on change
+  };
+
+
   return (
     <div id="wrapper">
         
@@ -86,7 +90,7 @@ const CheckinEngine = ({ apartmentTitle, apartmentName }) => {
                     name="day"
                     id="day"
                     value={day}
-                    onChange={(e) => setDay(e.target.value)}
+                    onChange={handleChange(setDay)}
                     defaultvalue={day}
                   >
                     <option value="01">1</option>
