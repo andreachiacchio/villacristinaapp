@@ -147,7 +147,7 @@ const Aerial = (props ) => {
 
         <footer id="footer">
           <span className="copyright">
-            &copy; 2023. Design by Simone Ruggiero and Raffaele Chiacchio
+            &copy; 2024. Design by Simone Ruggiero and Raffaele Chiacchio
           </span>
         </footer>
       </div>
