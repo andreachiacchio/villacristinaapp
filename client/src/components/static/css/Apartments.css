@@ -1,0 +1,85 @@
+/* Style for the main container */
+.apartments-container {
+    height: 100vh;
+    overflow-y: auto;
+}
+.apartment-list {
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-around;
+    padding: 20px 0;
+}
+
+/* Style for each individual apartment item */
+.apartment-item {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 5px;
+    width: calc(30% - 20px);
+    box-sizing: border-box;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: #fff; /* added a solid white background for clarity */
+    text-align: center;
+}
+
+.apartment-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.apartment-item h2 {
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333; /* ensures a dark text color for contrast against light backgrounds */
+    text-align: center; /* centering the text horizontally */
+}
+
+/* Style for the apartment description */
+.apartment-item p {
+    font-size: 1.2em; /* increase the size a bit */
+    color: #333; /* ensure a dark text color for contrast */
+    line-height: 1.5; /* improve line spacing for better readability */
+    text-align: center; /* centering the text horizontally */
+}
+.book-button {
+    display: inline-block;
+    background-color: #a9a9a9;  /* Grey color */
+    color: #fff;  /* White text color */
+    padding: 6px 12px;  /* Reduced padding for a smaller appearance */
+    border-radius: 5px;  
+    text-decoration: none;  
+    margin-top: 15px;  
+    transition: background-color 0.3s ease; 
+}
+
+.book-button:hover {
+    background-color: #808080;  /* A slightly darker grey for hover */
+}
+
+
+
+/* Mobile screens: If the screen width is less than or equal to 768px */
+@media (max-width: 768px) {
+
+    .apartment-item {
+        width: 80%;  /* Adjusted for mobile size */
+    }
+
+    .apartment-item h2 {
+        font-size: 1.1em;  /* Adjusted font size */
+    }
+
+    .apartment-item p {
+        font-size: 0.9em;  /* Adjusted font size */
+    }
+
+    .book-button {
+        padding: 4px 9px;  /* Adjusted padding for a smaller button */
+    }
+}
+
+
+

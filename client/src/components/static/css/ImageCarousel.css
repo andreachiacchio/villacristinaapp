@@ -1,0 +1,33 @@
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden; /*  /* This will center the element */
+}
+
+.carousel-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 1;
+}
+
+.carousel-button-prev {
+    left: 0;
+}
+
+.carousel-button-next {
+    right: 0;
+}

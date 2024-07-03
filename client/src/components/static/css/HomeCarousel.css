@@ -1,0 +1,17 @@
+.home-carousel-container {
+    display: flex;
+    border: 3px solid red;
+    width: 100%;
+}
+.home-carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+.home-carousel-card {
+    color:black;
+    flex: 1 1 calc(33.333% - 20px);  /* subtract any margin or padding you might have */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+}

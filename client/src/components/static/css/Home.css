@@ -1,0 +1,70 @@
+.homeComponent {
+    width: 100%;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    position: relative;
+    background-color: #f5f5f7;
+    margin: 0;
+    color: white;
+    text-align: center;
+    height: 100vh;
+}
+.homeComponent::before {
+    width: 100%;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4); 
+    z-index: -1; 
+}
+.titleBackground {
+    background: url('../images/naples.jpg') no-repeat center center;
+    background-size: cover; /* makes sure the image covers the entire div */
+    height: 100vh; /* making it occupy the entire viewport height */
+    display: flex; /* aligning items to center */
+    justify-content: center;
+    align-items: center;
+}
+
+.homeComponent h1 {
+    font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    font-weight: bold;
+    font-size: 72px;
+    line-height: 1.2;
+    font-size: clamp(2em, 8vw, 3em); /* adjust the values as needed */
+    color: white; /* ensuring the title is readable */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* adding a shadow to make the text stand out from the background */
+    margin: 0;
+    padding: 20px; /* some padding for breathing space */
+    text-align: center; /* centering the text horizontally */
+}
+
+.naplesBrief {
+    padding: 20px; 
+    font-size: 16px; /* adjust as needed */
+    background-color: #f5f5f7; /* or any color you'd like */
+    color: black;
+}
+
+
+/* For mobile phones: */
+@media (max-width: 480px) {
+    .titleBackground,
+    .naplesBrief {
+        scroll-snap-align: start;
+    }
+    /* Your existing mobile styles, like font adjustments, etc. */
+    .naplesBrief {
+        font-size: 14px; 
+    }
+    .homeComponent h1 {
+        font-size: 2em; 
+        padding: 10px; 
+    }
+
+    
+}
+

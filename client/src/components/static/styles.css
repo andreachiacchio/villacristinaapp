@@ -1,0 +1,275 @@
+/* Mobile */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+p {
+  margin: 0;
+}
+
+.mobile {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 38px;
+  width: 360px;
+  height: 1112px;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 1);
+}
+.frame-1 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+.head-_mobile {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  box-sizing: border-box;
+}
+.check-in {
+  color: rgba(238, 104, 95, 1);
+  font-size: 32px;
+  line-height: 32px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 32px 125px 178px 16px;
+  box-sizing: border-box;
+  background-color: rgba(219, 230, 243, 1);
+}
+.la-napoli-sotterranea {
+  color: rgba(38, 39, 41, 1);
+  font-size: 32px;
+  line-height: 32px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+}
+
+.please-input-your-check {
+  color: rgba(38, 39, 41, 1);
+  font-size: 16px;
+  line-height: 188%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+}
+
+.search {
+  position: absolute;
+  top: 287px;
+  left: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 328px;
+  height: 70px;
+  padding: 11px 15px 12px 35px;
+  border: 0px solid rgba(214, 214, 214, 1);
+  border-radius: 20px;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.16);
+}
+.where {
+  position: relative;
+  width: 70px;
+  height: 100%;
+  box-sizing: border-box;
+}
+.day {
+  
+  top: 0px;
+  left: 0px;
+  color: rgba(48, 48, 56, 1);
+  font-size: 16px;
+  line-height: 150%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+}
+
+.input-day {
+  position: absolute;
+  top: 19px;
+  left: 0px;
+  color: rgba(163, 163, 163, 1);
+  font-size: 14px;
+  line-height: 171%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+}
+
+.group-1 {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  box-sizing: border-box;
+}
+.month {
+  color: rgba(38, 39, 41, 1);
+  font-size: 16px;
+  line-height: 150%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+}
+
+.select-month {
+  color: rgba(163, 163, 163, 1);
+  font-size: 14px;
+  line-height: 171%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+}
+
+.button {
+  width: 30px;
+  height: 30px;
+}
+
+.can-tfind-your-reservat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgba(38, 39, 41, 1);
+  font-size: 28px;
+  line-height: 28px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  text-align: center;
+}
+
+.why {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: fit-content;
+  box-sizing: border-box;
+}
+.please-note-that-only-af {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgba(51, 51, 51, 1);
+  font-size: 16px;
+  line-height: 175%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  text-align: center;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  height: 424px;
+  box-sizing: border-box;
+}
+.advantages-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.img {
+  width: 100px;
+  height: 100px;
+}
+
+.txt {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgba(38, 39, 41, 1);
+  font-size: 20px;
+  line-height: 100%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  text-align: center;
+}
+
+.select-your-check-in-dat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgba(38, 39, 41, 1);
+  font-size: 16px;
+  line-height: 138%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  text-align: center;
+}
+
+.advantages {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.img-1 {
+  width: 100px;
+  height: 100px;
+}
+
+.txt-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.payment-methods-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgba(38, 39, 41, 1);
+  font-size: 20px;
+  line-height: 100%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  text-align: center;
+}
+
+.we-have-alot-of-them-from {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgba(38, 39, 41, 1);
+  font-size: 16px;
+  line-height: 138%;
+  font-family: Montserrat, sans-serif;
+  font-weight: 400;
+  text-align: center;
+}

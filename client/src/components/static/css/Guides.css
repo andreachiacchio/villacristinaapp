@@ -1,0 +1,94 @@
+.Guides-header {
+    overflow-y: auto;
+    max-height: 100vh;
+}
+.Guides h1 {
+    padding-top: 20px;
+    color: black;
+    margin: 0;         /* Remove margin at the top since we're using padding for spacing */
+    font-weight: 500;
+    font-size: 2.5em;
+    text-align: center;  
+}
+
+
+.content-wrapper {
+    max-height: 100vh;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.places-list {
+    list-style-type: none;
+    padding: 0;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.place-item {
+    margin-bottom: 20px;
+}
+
+.place-box {
+    background-color: rgba(220, 220, 220, 0.7);
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.place-item h2 {
+    font-size: 24px;
+    margin: 0 0 10px;
+    color: #333;
+}
+
+.place-item a:hover {
+    text-decoration: underline;
+}
+
+.place-item p {
+    margin: 0;
+    color: #555;
+}
+
+.booking-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+.book-button {
+    display: block;
+    background-color: #61dafb;
+    color: #282c34;
+    padding: 8px 16px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.book-button:hover {
+    background-color: #4fa7d5;
+}
+
+@media (max-width: 768px) {
+    .booking-buttons {
+        top: 5px;
+        right: 5px;
+        flex-direction: column;
+    }
+
+    .book-button {
+        margin-bottom: 5px;
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .Guides-header {
+        padding-top: 100px;
+    }
+}
