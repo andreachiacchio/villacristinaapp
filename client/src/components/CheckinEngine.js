@@ -25,7 +25,7 @@ const CheckinEngine = ({ apartmentTitle, apartmentName }) => {
     const bookingData = {
       day: parseInt(day, 10),
       month: parseInt(month, 10),
-      year: 2025,
+      year: new Date().getFullYear(),
     };
 
     setLoading(true); // Show spinner
