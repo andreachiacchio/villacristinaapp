@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/WKJKwsR/1.jpg">
+    <title>Villa Cristina - Your Digital Concierge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e67e22;
+            --accent: #3498db;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --text: #2c3e50;
+            --gold: #d4af37;
+        }
+
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            max-width: 430px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        /* Splash Screen */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 0.5s ease-out 2s forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            },
+            gallery: {
+                title: "Photo Gallery",
+                content: `
+                    <p style="text-align: center; margin-bottom: 20px;">Explore the beauty of Villa Cristina through our photo collection</p>
+                    
+                    <div class="gallery-grid">
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=1200')">
+                            <img src="https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=400" alt="Living Room">
+                            <div class="gallery-caption">Panoramic Living Room</div>
+                        </div>
+                        
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200')">
+                            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400" alt="Bedroom">
+                            <div class="gallery-caption">Master Bedroom Suite</div>
+                        </div>
+                        
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=1200')">
+                            <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=400" alt="Kitchen">
+                            <div class="gallery-caption">Fully Equipped Kitchen</div>
+                        </div>
+                        
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1200')">
+                            <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400" alt="Terrace">
+                            <div class="gallery-caption">Sunset Terrace</div>
+                        </div>
+                        
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1537726235470-8504e3beef77?w=1200')">
+                            <img src="https://images.unsplash.com/photo-1537726235470-8504e3beef77?w=400" alt="Praiano View">
+                            <div class="gallery-caption">Praiano Coastline</div>
+                        </div>
+                        
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1599073951298-ed4e55c5320f?w=1200')">
+                            <img src="https://images.unsplash.com/photo-1599073951298-ed4e55c5320f?w=400" alt="Pool Area">
+                            <div class="gallery-caption">Pool & Jacuzzi Area</div>
+                        </div>
+                        
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1609949279531-cf48d64bed89?w=1200')">
+                            <img src="https://images.unsplash.com/photo-1609949279531-cf48d64bed89?w=400" alt="Dining Area">
+                            <div class="gallery-caption">Al Fresco Dining</div>
+                        </div>
+                        
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200')">
+                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400" alt="Exterior">
+                            <div class="gallery-caption">Villa Exterior</div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box" style="margin-top: 30px;">
+                        <p style="text-align: center; margin: 0;">
+                            <strong>💡 Tip:</strong> Tap any photo to view it full screen
+                        </p>
+                    </div>
+                `
+            }
+        }
+
+        .splash-logo {
+            font-size: 48px;
+            color: white;
+            font-weight: 800;
+            margin-bottom: 10px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .splash-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 18px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #FF006E 0%, #8338EC 100%);
+            color: white;
+            padding: 60px 20px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: ellipse(100% 100% at 50% 0%);
+        }
+
+        /* Photo Gallery */
+        .photo-gallery {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 15px 0;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .photo-gallery::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .photo-gallery::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .photo-gallery::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #FF006E 0%, #8338EC 100%);
+            border-radius: 10px;
+        }
+
+        .gallery-photo {
+            min-width: 280px;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            scroll-snap-align: start;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-photo:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Hero Image */
+        .hero-image {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7) 100%);
+        }
+
+        .hero-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            color: white;
+            z-index: 1;
+        }
+
+        .hero-text h2 {
+            font-size: 22px;
+            margin: 0;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-text p {
+            font-size: 14px;
+            margin-top: 5px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(100px, -100px) scale(1.1); }
+            66% { transform: translate(-100px, 100px) scale(0.9); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .greeting {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .villa-name {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .location {
+            font-size: 18px;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        /* Welcome Card */
+        .welcome-card {
+            background: white;
+            margin: -30px 20px 20px;
+            padding: 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        .welcome-title {
+            font-size: 24px;
+            font-weight: 400;
+            margin: 20px 0 10px;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        .welcome-subtitle {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 0 20px 20px;
+            font-weight: 300;
+        }
+
+        /* Icon Grid */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 0 20px 30px;
+        }
+
+        .icon-item {
+            background: white;
+            border-radius: 10px;
+            padding: 20px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #f0f0f0;
+        }
+
+        .icon-item:active {
+            transform: scale(0.98);
+        }
+
+        .icon-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: var(--gold);
+        }
+
+        .icon-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .icon-item:hover .icon {
+            transform: scale(1.1);
+        }
+
+        .icon-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 30px 30px 0 0;
+            padding: 10px 20px 20px;
+            max-height: 85vh;
+            overflow-y: auto;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-handle {
+            width: 50px;
+            height: 5px;
+            background: #DDD;
+            border-radius: 10px;
+            margin: 10px auto 20px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        .close-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f8f8f8;
+            border: 1px solid #e0e0e0;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            color: var(--primary);
+        }
+
+        .close-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 10px 0;
+            line-height: 1.8;
+            color: #444;
+            font-size: 16px;
+        }
+
+        .modal-body h3 {
+            color: var(--primary);
+            margin: 25px 0 15px 0;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-body ul {
+            margin-left: 0;
+            margin-bottom: 20px;
+            list-style: none;
+        }
+
+        .modal-body li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .modal-body li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-left: 3px solid var(--gold);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .contact-card {
+            background: var(--primary);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .contact-card h4 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .contact-card p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        .contact-card a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(255,255,255,0.5);
+        }
+
+        /* Beautiful scrollbar */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #FF006E 0%, #8338EC 100%);
+            border-radius: 3px;
+        }
+
+        /* Photo Gallery Modal Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+            aspect-ratio: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            color: white;
+            padding: 15px 10px 10px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 2001;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 30px 20px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 380px) {
+            .icon-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .villa-name {
+                font-size: 30px;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div class="splash-screen">
+        <div class="splash-logo">Villa Cristina</div>
+        <div class="splash-subtitle">PRAIANO</div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="greeting">Welcome to</div>
+                <h1 class="villa-name">Villa Cristina</h1>
+                <p class="location">
+                    <span>Praiano • Amalfi Coast</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Welcome Card -->
+        <div class="welcome-card">
+            <div class="hero-image">
+                <img src="https://i.ibb.co/WKJKwsR/1.jpg" alt="Villa Cristina Living Room">
+                <div class="hero-overlay"></div>
+                <div class="hero-text">
+                    <h2>Your Luxury Retreat</h2>
+                    <p>Discover the authentic Amalfi Coast experience</p>
+                </div>
+            </div>
+            <h2 class="welcome-title">Welcome to Villa Cristina</h2>
+            <p class="welcome-subtitle">
+                Your complete guide to an unforgettable stay. 
+                Tap any section below to explore.
+            </p>
+        </div>
+
+        <!-- Icon Grid -->
+        <div class="icon-grid">
+            <div class="icon-item" onclick="openModal('welcome')">
+                <div class="icon-content">
+                    <div class="icon">🏡</div>
+                    <div class="icon-label">Welcome</div>
+                </div>
+            </div>
+
+            <div class="icon-item" onclick="openModal('directions')">
+                <div class="icon-content">
+                    <div class="icon">📍</div>
+                    <div class="icon-label">Directions</div>
+                </div>
+            </div>
+
+            <div class="icon-item" onclick="openModal('checkin')">
+                <div class="icon-content">
+                    <div class="icon">🔑</div>
+                    <div class="icon-label">Check-in/out</div>
+                </div>
+            </div>
+
+            <div class="icon-item" onclick="openModal('wifi')">
+                <div class="icon-content">
+                    <div class="icon">📶</div>
+                    <div class="icon-label">WiFi</div>
+                </div>
+            </div>
+
+            <div class="icon-item" onclick="openModal('rules')">
+                <div class="icon-content">
+                    <div class="icon">📋</div>
+                    <div class="icon-label">House Rules</div>
+                </div>
+            </div>
+
+            <div class="icon-item" onclick="openModal('faq')">
+                <div class="icon-content">
+                    <div class="icon">💬</div>
+                    <div class="icon-label">FAQ</div>
+                </div>
+            </div>
+
+            <div class="icon-item" onclick="openModal('shopping')">
+                <div class="icon-content">
+                    <div class="icon">🛒</div>
+                    <div class="icon-label">Shopping</div>
+                </div>
+            </div>
+
+            <div class="icon-item" onclick="openModal('gallery')">
+                <div class="icon-content">
+                    <div class="icon">📸</div>
+                    <div class="icon-label">Gallery</div>
+                </div>
+            </div>
+
+            <div class="icon-item" onclick="openModal('restaurants')">
+                <div class="icon-content">
+                    <div class="icon">🍕</div>
+                    <div class="icon-label">Restaurants</div>
+                </div>
+            </div>
+
+            <div class="icon-item" onclick="openModal('places')">
+                <div class="icon-content">
+                    <div class="icon">🏖️</div>
+                    <div class="icon-label">Places</div>
+                </div>
+            </div>
+
+            <div class="icon-item" onclick="openModal('activities')">
+                <div class="icon-content">
+                    <div class="icon">🚢</div>
+                    <div class="icon-label">Activities</div>
+                </div>
+            </div>
+
+            <div class="icon-item" onclick="openModal('transport')">
+                <div class="icon-content">
+                    <div class="icon">🚌</div>
+                    <div class="icon-label">Transport</div>
+                </div>
+            </div>
+
+            <div class="icon-item" onclick="openModal('emergency')">
+                <div class="icon-content">
+                    <div class="icon">🆘</div>
+                    <div class="icon-label">Emergency</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <a href="https://villacristinapraiano.com" style="color: var(--primary); text-decoration: none; font-weight: 500;">
+                villacristinapraiano.com
+            </a><br>
+            <span style="font-size: 12px; color: #999;">© 2024 Villa Cristina - All rights reserved</span>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-handle"></div>
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Title</h2>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightboxImg" src="" alt="Villa Cristina">
+    </div>
+
+    <script>
+        const modalData = {
+            welcome: {
+                title: "Welcome to Villa Cristina",
+                content: `
+                    <div class="photo-gallery">
+                        <div class="gallery-photo">
+                            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wgARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAX/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAGgP//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAQUCf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Bf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Bf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEABj8Cf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8hf//aAAwDAQACAAMAAAAQD//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Qf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Qf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8Qf//Z" alt="Billiard Room with Sea View">
+                        </div>
+                        <div class="gallery-photo">
+                            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wgARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAX/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAGgP//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAQUCf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Bf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Bf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEABj8Cf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8hf//aAAwDAQACAAMAAAAQD//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Qf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Qf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8Qf//Z" alt="Kitchen with Terrace Access">
+                        </div>
+                        <div class="gallery-photo">
+                            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wgARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAX/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAGgP//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAQUCf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Bf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Bf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEABj8Cf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8hf//aAAwDAQACAAMAAAAQD//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Qf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Qf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8Qf//Z" alt="Living Room with Arched Windows">
+                        </div>
+                        <div class="gallery-photo">
+                            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wgARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAX/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAGgP//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAQUCf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Bf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Bf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEABj8Cf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8hf//aAAwDAQACAAMAAAAQD//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Qf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Qf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8Qf//Z" alt="Master Bedroom with Balcony">
+                        </div>
+                        <div class="gallery-photo">
+                            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wgARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAX/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAGgP//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAQUCf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Bf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Bf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEABj8Cf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8hf//aAAwDAQACAAMAAAAQD//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Qf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Qf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8Qf//Z" alt="Panoramic Terrace">
+                        </div>
+                        <div class="gallery-photo">
+                            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wgARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAX/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAGgP//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAQUCf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Bf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Bf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEABj8Cf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8hf//aAAwDAQACAAMAAAAQD//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Qf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Qf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8Qf//Z" alt="Jacuzzi with View">
+                        </div>
+                    </div>
+                    
+                    <p style="font-size: 18px; line-height: 1.6; margin-bottom: 20px;">We're delighted to welcome you to our spectacular villa in Praiano, where luxury meets the breathtaking beauty of the Amalfi Coast!</p>
+                    
+                    <h3>🏡 Your Villa Features</h3>
+                    <ul>
+                        <li><strong>3 spacious bedrooms</strong> with traditional Vietri tiles & sea views</li>
+                        <li><strong>3 modern bathrooms</strong> with walk-in showers</li>
+                        <li><strong>Fully equipped kitchen</strong> with traditional ceramic tiles</li>
+                        <li><strong>Unique billiard room</strong> with panoramic sea views</li>
+                        <li><strong>Large living room</strong> with arched windows opening to terrace</li>
+                        <li><strong>Two spectacular terraces</strong> with flowers and loungers</li>
+                        <li><strong>Heated jacuzzi</strong> on upper terrace (available on request)</li>
+                        <li><strong>Private gated parking</strong> - NO STEPS from car to villa!</li>
+                        <li><strong>Traditional architecture</strong> with modern comfort</li>
+                    </ul>
+                    
+                    <div class="info-box" style="background: linear-gradient(135deg, #fff5f5 0%, #ffebeb 100%); border-left-color: #FF006E;">
+                        <h4 style="color: #FF006E; margin-bottom: 10px;">✨ What Makes Villa Cristina Special</h4>
+                        <ul style="margin: 0;">
+                            <li>NO STEPS access - extremely rare on the Amalfi Coast!</li>
+                            <li>Authentic Italian style with Vietri ceramics throughout</li>
+                            <li>Breathtaking 180° sea views from every room</li>
+                            <li>Peaceful location but close to everything</li>
+                            <li>Traditional architecture preserved with modern amenities</li>
+                            <li>Private, gated property for complete privacy</li>
+                            <li>Rated 9.8/10 on Booking.com!</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>📍 Perfect Location in Praiano</h3>
+                    <p>Your villa is ideally situated in a quiet residential area with:</p>
+                    <ul>
+                        <li>Marina di Praia Beach - 13 min walk (600m)</li>
+                        <li>Gavitella Beach - 18 min walk</li>
+                        <li>San Gennaro Church - 15 min walk</li>
+                        <li>Local mini-market - 5 min walk</li>
+                        <li>Bus stop to Positano/Amalfi - 8 min walk</li>
+                        <li>Restaurants and cafes - 5-10 min walk</li>
+                    </ul>
+                    
+                    <div class="contact-card">
+                        <h4>Your Hosts - Andrea & Michele</h4>
+                        <p>📱 Mobile: +39 XXX XXX XXXX</p>
+                        <p>💬 WhatsApp: Available 24/7</p>
+                        <p>📧 Email: <a href="mailto:info@villacristinapraiano.com">info@villacristinapraiano.com</a></p>
+                        <p>🌐 Website: <a href="https://villacristinapraiano.com" style="color: white;">villacristinapraiano.com</a></p>
+                        <p style="margin-top: 15px; font-size: 14px;">We're always here to help make your stay perfect!</p>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <p style="font-size: 16px; color: #666; margin-bottom: 10px;">Experience the authentic Amalfi Coast</p>
+                        <p style="font-size: 24px; font-weight: 700; background: linear-gradient(135deg, #FF006E 0%, #8338EC 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Benvenuti a Casa!</p>
+                    </div>
+                `
+            },
+            checkin: {
+                title: "Check-in & Check-out",
+                content: `
+                    <h3>Check-in Time</h3>
+                    <div class="info-box">
+                        <p><strong>Standard check-in:</strong> 3:00 PM - 8:00 PM</p>
+                        <p><strong>Late check-in:</strong> Available upon request</p>
+                        <p style="margin-top: 10px; font-size: 14px;">We'll meet you at the property to hand over the keys and show you around.</p>
+                    </div>
+                    
+                    <h3>Check-in Process</h3>
+                    <ul>
+                        <li>We'll meet you at the villa entrance</li>
+                        <li>Quick tour of the property and amenities</li>
+                        <li>Keys handover and alarm explanation</li>
+                        <li>Review of important information</li>
+                        <li>Local tips and recommendations</li>
+                    </ul>
+                    
+                    <h3>Check-out Time</h3>
+                    <div class="info-box">
+                        <p><strong>Standard check-out:</strong> By 10:00 AM</p>
+                        <p><strong>Late check-out:</strong> Subject to availability (fee may apply)</p>
+                    </div>
+                    
+                    <h3>Check-out Process</h3>
+                    <ul>
+                        <li>Leave keys on the kitchen counter</li>
+                        <li>Close all windows and doors</li>
+                        <li>Turn off air conditioning units</li>
+                        <li>Check for personal belongings</li>
+                        <li>Let us know when you've left</li>
+                    </ul>
+                `
+            },
+            rules: {
+                title: "House Rules",
+                content: `
+                    <h3>Important Rules</h3>
+                    <ul>
+                        <li>🚭 No smoking inside (terrace is OK)</li>
+                        <li>🐕 Sorry, no pets allowed</li>
+                        <li>🎉 No parties or loud events</li>
+                        <li>🔇 Quiet hours: 10 PM - 8 AM</li>
+                        <li>👥 Maximum occupancy: 4 guests</li>
+                        <li>👟 No shoes inside please</li>
+                    </ul>
+                    
+                    <h3>Using the Property</h3>
+                    <ul>
+                        <li>Treat our home with care and respect</li>
+                        <li>Clean up after cooking</li>
+                        <li>Don't move furniture</li>
+                        <li>Use provided beach towels for the beach</li>
+                        <li>Report any damages immediately</li>
+                    </ul>
+                    
+                    <h3>Waste & Recycling</h3>
+                    <div class="info-box">
+                        <p><strong>Recycling is mandatory in Praiano:</strong></p>
+                        <ul style="margin-top: 10px;">
+                            <li>🟡 Plastic: Yellow bin</li>
+                            <li>🔵 Paper: Blue bin</li>
+                            <li>🟢 Glass: Green bin</li>
+                            <li>🟤 Organic: Brown bin</li>
+                            <li>⚫ General waste: Black bin</li>
+                        </ul>
+                        <p style="margin-top: 10px; font-size: 14px;">Collection days: Mon/Wed/Fri at 6 AM</p>
+                    </div>
+                `
+            },
+            wifi: {
+                title: "WiFi Connection",
+                content: `
+                    <div class="contact-card">
+                        <h4>WiFi Credentials</h4>
+                        <p style="font-size: 18px; margin: 15px 0;">Network: <strong>VillaCristina_5G</strong></p>
+                        <p style="font-size: 18px;">Password: <strong>Amalfi2024!</strong></p>
+                    </div>
+                    
+                    <h3>Connection Info</h3>
+                    <ul>
+                        <li>High-speed fiber optic (100 Mbps)</li>
+                        <li>Coverage throughout the property</li>
+                        <li>Perfect for remote work</li>
+                        <li>Netflix & streaming ready</li>
+                        <li>Printer available on network</li>
+                    </ul>
+                    
+                    <h3>Troubleshooting</h3>
+                    <div class="info-box">
+                        <p>If you experience connection issues:</p>
+                        <ul style="margin-top: 10px;">
+                            <li>Restart the router (living room TV cabinet)</li>
+                            <li>Wait 2 minutes and reconnect</li>
+                            <li>Contact us if problems persist</li>
+                        </ul>
+                    </div>
+                `
+            },
+            directions: {
+                title: "Getting Here",
+                content: `
+                    <h3>Villa Address</h3>
+                    <div class="info-box">
+                        <p><strong>Villa Cristina</strong><br>
+                        Via Roma 123<br>
+                        84010 Praiano (SA)<br>
+                        Amalfi Coast, Italy</p>
+                        <p style="margin-top: 10px;">GPS: 40.6109° N, 14.5338° E</p>
+                    </div>
+                    
+                    <h3>From Naples Airport (NAP)</h3>
+                    <ul>
+                        <li><strong>By Car:</strong> A3 to Castellammare, then SS163 (90 min)</li>
+                        <li><strong>By Bus:</strong> Curreri to Sorrento + SITA bus (2.5 hrs)</li>
+                        <li><strong>Private Transfer:</strong> We can arrange (€130)</li>
+                        <li><strong>By Train + Bus:</strong> To Salerno + SITA bus</li>
+                    </ul>
+                    
+                    <h3>From Rome</h3>
+                    <ul>
+                        <li><strong>By Car:</strong> A1 to Naples, then A3 (3.5 hrs)</li>
+                        <li><strong>By Train:</strong> To Salerno (2 hrs) + SITA bus</li>
+                    </ul>
+                    
+                    <h3>Parking</h3>
+                    <div class="info-box">
+                        <p><strong>Your reserved parking space:</strong></p>
+                        <p>Located 50m before the villa on the right. Look for the "Villa Cristina" sign. The space is narrow - approach slowly!</p>
+                    </div>
+                    
+                    <h3>Final Approach</h3>
+                    <p>The last 500m are on a narrow, winding road typical of the Amalfi Coast. Drive slowly and honk before blind corners. Local drivers are used to it!</p>
+                `
+            },
+            restaurants: {
+                title: "Where to Eat",
+                content: `
+                    <h3>🌟 Our Top Picks in Praiano</h3>
+                    <ul>
+                        <li><strong>Kasai</strong> - Michelin-starred with sunset views</li>
+                        <li><strong>Il Pirata</strong> - Fresh seafood on the beach</li>
+                        <li><strong>Trattoria San Gennaro</strong> - Authentic local cuisine</li>
+                        <li><strong>La Strada</strong> - Best pizza in town</li>
+                    </ul>
+                    
+                    <h3>🍝 Positano (10 min drive)</h3>
+                    <ul>
+                        <li><strong>La Sponda</strong> - Romantic Michelin star dining</li>
+                        <li><strong>Da Adolfo</strong> - Beach club accessible by boat</li>
+                        <li><strong>Chez Black</strong> - Celebrity spotting spot</li>
+                        <li><strong>Next2</strong> - Modern Italian fusion</li>
+                    </ul>
+                    
+                    <h3>🦞 Amalfi (15 min drive)</h3>
+                    <ul>
+                        <li><strong>Marina Grande</strong> - Seafood with harbor views</li>
+                        <li><strong>Il Mulino</strong> - Traditional pasta dishes</li>
+                        <li><strong>Da Gemma</strong> - Family-run since 1872</li>
+                    </ul>
+                    
+                    <div class="info-box">
+                        <p><strong>💡 Pro Tips:</strong></p>
+                        <ul style="margin-top: 10px;">
+                            <li>Book dinner reservations in advance (we can help!)</li>
+                            <li>Lunch is 12:30-2:30, dinner from 7:30 PM</li>
+                            <li>Try the local specialties: scialatielli & delizia al limone</li>
+                            <li>Most places close on Mondays off-season</li>
+                        </ul>
+                    </div>
+                `
+            },
+            transport: {
+                title: "Getting Around",
+                content: `
+                    <h3>🚌 SITA Bus Service</h3>
+                    <div class="info-box">
+                        <p><strong>Nearest stop:</strong> Praiano Chiesa (5 min walk)</p>
+                        <p><strong>Tickets:</strong> €2.50 per ride (buy at tabacchi)</p>
+                        <p><strong>Day pass:</strong> €10 (unlimited rides)</p>
+                    </div>
+                    
+                    <h3>Main Routes & Times</h3>
+                    <ul>
+                        <li><strong>To Positano:</strong> Every 30 min (10 min ride)</li>
+                        <li><strong>To Amalfi:</strong> Every hour (20 min ride)</li>
+                        <li><strong>To Sorrento:</strong> Via Positano (1 hour)</li>
+                        <li><strong>To Salerno:</strong> 4 times daily (1.5 hours)</li>
+                    </ul>
+                    
+                    <h3>🚕 Taxi & Private Drivers</h3>
+                    <ul>
+                        <li><strong>Praiano Taxi:</strong> +39 089 874 365</li>
+                        <li><strong>Gennaro (our driver):</strong> +39 XXX XXX XXXX</li>
+                        <li><strong>Typical fares:</strong> Positano €25, Amalfi €35</li>
+                    </ul>
+                    
+                    <h3>🛵 Scooter & Boat Rental</h3>
+                    <ul>
+                        <li><strong>Positano Rent:</strong> Scooters from €60/day</li>
+                        <li><strong>Lucibello Boats:</strong> From €200/day + fuel</li>
+                        <li><strong>No license boats:</strong> 40hp available</li>
+                    </ul>
+                    
+                    <div class="info-box">
+                        <p><strong>⚠️ Driving Tips:</strong></p>
+                        <ul style="margin-top: 10px;">
+                            <li>Roads are narrow - rent a small car!</li>
+                            <li>Honk before blind curves</li>
+                            <li>Parking is challenging in summer</li>
+                            <li>Consider boat trips to avoid traffic</li>
+                        </ul>
+                    </div>
+                `
+            },
+            places: {
+                title: "Places to Visit",
+                content: `
+                    <h3>🏖️ Beaches Near You</h3>
+                    <ul>
+                        <li><strong>Marina di Praia</strong> - 10 min walk, sandy beach</li>
+                        <li><strong>Gavitella Beach</strong> - 15 min walk, quieter option</li>
+                        <li><strong>Furore Fjord</strong> - 10 min drive, stunning!</li>
+                        <li><strong>Arienzo Beach</strong> - Positano's hidden gem</li>
+                    </ul>
+                    
+                    <h3>🏛️ Must-See Attractions</h3>
+                    <ul>
+                        <li><strong>Path of the Gods</strong> - Epic hiking trail (3 hrs)</li>
+                        <li><strong>Emerald Grotto</strong> - Magical sea cave</li>
+                        <li><strong>Amalfi Cathedral</strong> - 9th-century beauty</li>
+                        <li><strong>Villa Rufolo</strong> - Ravello's gardens</li>
+                        <li><strong>Positano</strong> - The vertical town</li>
+                    </ul>
+                    
+                    <h3>🗓️ Day Trips</h3>
+                    <ul>
+                        <li><strong>Capri</strong> - Ferry from Amalfi (€25)</li>
+                        <li><strong>Pompeii</strong> - Ancient ruins (1.5 hr drive)</li>
+                        <li><strong>Sorrento</strong> - Limoncello capital (45 min)</li>
+                        <li><strong>Naples</strong> - Pizza pilgrimage (1.5 hrs)</li>
+                    </ul>
+                    
+                    <div class="contact-card">
+                        <h4>🚢 Boat Trip Special</h4>
+                        <p>Our friend Captain Antonio offers exclusive boat tours</p>
+                        <p style="margin-top: 10px;">Half day: €400 | Full day: €700</p>
+                        <p style="margin-top: 5px;">Includes: Capri, swimming stops, prosecco</p>
+                        <p style="margin-top: 10px; font-size: 14px;">Mention Villa Cristina for 10% off!</p>
+                    </div>
+                `
+            },
+            shopping: {
+                title: "Shopping & Services",
+                content: `
+                    <h3>🏪 Groceries & Essentials</h3>
+                    <ul>
+                        <li><strong>Tutto Bene Market</strong> - Main square (5 min walk)</li>
+                        <li><strong>Emilia's Deli</strong> - Fresh mozzarella daily!</li>
+                        <li><strong>Netta Supermarket</strong> - Positano (larger selection)</li>
+                        <li><strong>Fish market</strong> - Marina di Praia (mornings)</li>
+                    </ul>
+                    
+                    <h3>💊 Pharmacy & Medical</h3>
+                    <ul>
+                        <li><strong>Farmacia Praiano</strong> - Via Capriglione 120</li>
+                        <li><strong>Emergency doctor</strong> - Positano medical center</li>
+                        <li><strong>Dentist</strong> - Dr. Romano in Amalfi</li>
+                        <li><strong>Hospital</strong> - Castiglione di Ravello</li>
+                    </ul>
+                    
+                    <h3>🎁 Local Products</h3>
+                    <ul>
+                        <li><strong>Ceramics</strong> - Ceramica Casola (beautiful!)</li>
+                        <li><strong>Limoncello</strong> - I Giardini di Ravello</li>
+                        <li><strong>Sandals</strong> - Positano leather sandals</li>
+                        <li><strong>Linen clothes</strong> - Positano fashion</li>
+                    </ul>
+                    
+                    <h3>🏧 Banking & Services</h3>
+                    <div class="info-box">
+                        <p><strong>ATM:</strong> Main square (Banco di Napoli)</p>
+                        <p><strong>Post Office:</strong> Via Roma (closed Sundays)</p>
+                        <p><strong>Laundry:</strong> Positano center (same day service)</p>
+                        <p><strong>Hair salon:</strong> Bella Vista (book ahead!)</p>
+                    </div>
+                `
+            },
+            activities: {
+                title: "Things to Do",
+                content: `
+                    <h3>🏊 Water Activities</h3>
+                    <ul>
+                        <li><strong>Kayaking</strong> - Rent at Marina di Praia (€20/hr)</li>
+                        <li><strong>SUP boarding</strong> - Lessons available (€40)</li>
+                        <li><strong>Snorkeling</strong> - Equipment at beach shops</li>
+                        <li><strong>Diving</strong> - PADI center in Positano</li>
+                    </ul>
+                    
+                    <h3>⛵ Boat Experiences</h3>
+                    <ul>
+                        <li><strong>Sunset cruise</strong> - With aperitivo (€65 pp)</li>
+                        <li><strong>Capri day tour</strong> - All inclusive (€120 pp)</li>
+                        <li><strong>Private boat</strong> - Your own captain (€400/day)</li>
+                        <li><strong>Fishing trip</strong> - With local fishermen (€80 pp)</li>
+                    </ul>
+                    
+                    <h3>🎨 Cultural Experiences</h3>
+                    <ul>
+                        <li><strong>Cooking class</strong> - Mamma Agata, Ravello</li>
+                        <li><strong>Wine tasting</strong> - Marisa Cuomo winery</li>
+                        <li><strong>Ceramic workshop</strong> - Create your own</li>
+                        <li><strong>Lemon tour</strong> - Farm visit + limoncello</li>
+                    </ul>
+                    
+                    <h3>🥾 Active Adventures</h3>
+                    <ul>
+                        <li><strong>Path of Gods hike</strong> - Start early!</li>
+                        <li><strong>Rock climbing</strong> - Guided tours available</li>
+                        <li><strong>E-bike tours</strong> - Easier on the hills</li>
+                        <li><strong>Yoga classes</strong> - Beach yoga at sunrise</li>
+                    </ul>
+                    
+                    <div class="contact-card">
+                        <h4>Special Experience</h4>
+                        <p>We can arrange a private chef dinner on your terrace!</p>
+                        <p style="margin-top: 10px;">4-course meal with wine: €85 per person</p>
+                        <p style="margin-top: 5px; font-size: 14px;">Minimum 2 people - Book 48hrs ahead</p>
+                    </div>
+                `
+            },
+            emergency: {
+                title: "Emergency Contacts",
+                content: `
+                    <div class="contact-card" style="background: linear-gradient(135deg, #FF0000 0%, #FF6B6B 100%);">
+                        <h4>🚨 Emergency Numbers</h4>
+                        <p style="font-size: 20px; margin: 15px 0;"><strong>General Emergency: 112</strong></p>
+                        <p>Police: 113</p>
+                        <p>Medical Emergency: 118</p>
+                        <p>Fire Department: 115</p>
+                        <p>Coast Guard: 1530</p>
+                    </div>
+                    
+                    <h3>🏥 Medical Services</h3>
+                    <ul>
+                        <li><strong>Tourist Medical Center</strong> - Positano: 089 875 5833</li>
+                        <li><strong>Hospital Castiglione</strong> - Ravello: 089 859 111</li>
+                        <li><strong>English-speaking doctor</strong> - Dr. Marina: +39 XXX XXX</li>
+                        <li><strong>Pharmacy (24h)</strong> - Amalfi: 089 871 045</li>
+                    </ul>
+                    
+                    <h3>🏠 House Emergencies</h3>
+                    <ul>
+                        <li><strong>Host (urgent):</strong> +39 XXX XXX XXXX</li>
+                        <li><strong>Plumber:</strong> Giuseppe +39 XXX XXX XXXX</li>
+                        <li><strong>Electrician:</strong> Mario +39 XXX XXX XXXX</li>
+                        <li><strong>Gas emergency:</strong> 800 900 999</li>
+                    </ul>
+                    
+                    <div class="info-box">
+                        <p><strong>What to do in case of emergency:</strong></p>
+                        <ul style="margin-top: 10px;">
+                            <li>Stay calm and call appropriate number</li>
+                            <li>Address: Via Roma 123, Praiano</li>
+                            <li>Notify us immediately after</li>
+                            <li>First aid kit in bathroom cabinet</li>
+                        </ul>
+                    </div>
+                `
+            },
+            faq: {
+                title: "Frequently Asked Questions",
+                content: `
+                    <h3>Can I have visitors?</h3>
+                    <p>Day visitors are welcome! Overnight guests must be included in the original booking. Please let us know if you're expecting anyone.</p>
+                    
+                    <h3>Is there air conditioning?</h3>
+                    <p>Yes! Every room has AC. Please turn it off when you leave to save energy. The remote controls are on the wall.</p>
+                    
+                    <h3>Can I do laundry?</h3>
+                    <p>Yes, there's a washing machine in the utility room. Detergent is provided. Please hang clothes on the terrace drying rack.</p>
+                    
+                    <h3>Is the water safe to drink?</h3>
+                    <p>Yes, tap water is perfectly safe. We also provide complimentary bottled water for your first day.</p>
+                    
+                    <h3>What about mosquitoes?</h3>
+                    <p>We have mosquito screens on all windows. There's also repellent spray in the bathrooms. Citronella candles are on the terrace.</p>
+                    
+                    <h3>Can I cook fish/seafood?</h3>
+                    <p>Of course! Just use the kitchen exhaust fan and open windows. The fish market at Marina di Praia is excellent.</p>
+                    
+                    <h3>Is the WiFi good for work?</h3>
+                    <p>Yes! 100 Mbps fiber optic, perfect for video calls. There's a desk in the second bedroom if you need to work.</p>
+                    
+                    <h3>How do I use the coffee machine?</h3>
+                    <p>It's a Nespresso machine. Capsules are in the drawer. Press the button once to turn on, again to brew. Enjoy!</p>
+                    
+                    <h3>Can I request late check-out?</h3>
+                    <p>Contact us the day before. If no one is checking in, we can usually accommodate for a small fee.</p>
+                `
+            }
+        };
+
+        function openModal(type) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalTitle.textContent = modalData[type].title;
+            modalBody.innerHTML = modalData[type].content;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Trigger animation
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        function closeModal(event) {
+            if (!event || event.target.id === 'modal') {
+                const modal = document.getElementById('modal');
+                modal.classList.remove('show');
+                
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            }
+        }
+
+        // Touch gestures for mobile
+        let touchStartY = 0;
+        let touchEndY = 0;
+        let modalContent = document.querySelector('.modal-content');
+
+        modalContent.addEventListener('touchstart', (e) => {
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        modalContent.addEventListener('touchend', (e) => {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            if (touchEndY - touchStartY > 100) {
+                closeModal();
+            }
+        }
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Remove splash screen after animations
+        setTimeout(() => {
+            document.querySelector('.splash-screen').style.display = 'none';
+        }, 2500);
+
+        // Lightbox functions
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightboxImg');
+            img.src = imageSrc;
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
